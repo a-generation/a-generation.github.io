@@ -3,84 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Notepad</title>
-    <style>body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
+    <title>HTML5 Notepad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
 
-.menu {
-    background: white;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0);
-    display: flex;
-    justify-content: space-between;
-}
+        .menu {
+            background: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px #000;
+            display: flex;
+            justify-content: space-between;
+        }
 
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #000;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-}
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-button:hover {
-    background-color: #3B3B3B;
-}
+        button:hover {
+            background-color: #333;
+        }
 
-textarea {
-    flex: 1;
-    border: none;
-    padding: 20px;
-    box-sizing: border-box;
-    font-size: 16px;
-    resize: none;
-    outline: none;
-}
-</style>
+        textarea {
+            flex: 1;
+            border: none;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .modal input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            width: calc(50% - 10px);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
     <div class="menu">
-        <input type="file" id="fileInput" accept=".txt" style="display:none;">
-        <button onclick="document.getElementById('fileInput').click();">Open TXT File</button>
-        <button onclick="downloadFile()">Download as TXT</button>
+        <input type="file" id="fileInput" style="display:none;">
+        <button onclick="document.getElementById('fileInput').click();">Open File</button>
+        <button onclick="showSaveModal()">Save As</button>
     </div>
     <textarea id="notepad" placeholder="Type your notes here..."></textarea>
-    <script>// Function to download the text area content as a .txt file
-function downloadFile() {
-    const text = document.getElementById('notepad').value;
-    const blob = new Blob([text], { type: 'text/plain' });
-    const anchor = document.createElement('a');
-    anchor.download = 'note.txt';
-    anchor.href = window.URL.createObjectURL(blob);
-    anchor.target = '_blank';
-    anchor.style.display = 'none'; // Hide the element
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-}
 
-// Function to open a .txt file and display its content in the text area
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file && file.type === 'text/plain') {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('notepad').value = e.target.result;
-        };
-        reader.readAsText(file);
-    } else {
-        alert('Please select a valid .txt file.');
-    }
-});
-</script>
+    <div class="modal" id="saveModal">
+        <input type="text" id="fileName" placeholder="File Name">
+        <input type="text" id="fileExtension" placeholder="File Extension">
+        <div style="display: flex; justify-content: space-between;">
+            <button onclick="saveFile()">Save</button>
+            <button onclick="closeSaveModal()">Cancel</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        function downloadFile(fileName, fileExtension) {
+            const text = document.getElementById('notepad').value;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const anchor = document.createElement('a');
+            anchor.download = `${fileName}.${fileExtension}`;
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.target = '_blank';
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        }
+
+        function showSaveModal() {
+            document.getElementById('saveModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeSaveModal() {
+            document.getElementById('saveModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function saveFile() {
+            const fileName = document.getElementById('fileName').value || 'untitled';
+            const fileExtension = document.getElementById('fileExtension').value || 'txt';
+            downloadFile(fileName, fileExtension);
+            closeSaveModal();
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('notepad').value = e.target.result;
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please select a valid file.');
+            }
+        });
+    </script>
 </body>
 </html>
