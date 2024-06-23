@@ -1,109 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!--
+© 2024 A-Generation. All rights reserved.
+
+This code is proprietary and confidential.
+Any unauthorized copying, modification, distribution,
+or use of this code, in whole or in part, without
+express written permission from A-Generation, is strictly
+prohibited.
+-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Community</title>
-    <link rel="icon" href="favicon.png" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0 15px;
-        }
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .news {
-            margin-top: 20px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .news img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .news .meta {
-            color: #aaa;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .alert {
-            border: 1px solid rgb(239, 68, 68);
-            background-color: rgb(253, 236, 236);
-            color: rgb(0, 0, 0);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-size: 1em;
-            line-height: 1.5em;
-        }
-        .button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #000;
-        }
+    <title>Site Suspended</title>
+    <style type="text/css">
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 200%; /* Double the height to allow seamless looping */
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    animation: moveBackground 5s linear infinite;
+}
+
+@keyframes moveBackground {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+.stripe {
+    flex: 1;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.stripe1 {
+    background-color: #E0A800;
+}
+
+.stripe2 {
+    background-color: #EBB000;
+}
+
+.stripe3 {
+    background-color: #ffbf00;
+}
+
+.stripe4 {
+    background-color: #ffcc00;
+}
+
+.stripe5 {
+    background-color: #ffd900;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
     </style>
 </head>
 <body>
-
-<div class="navbar">
-    <a href="#">Главная</a>
-    <a href="#">Новости</a>
-    <a href="#">О нас</a>
-    <a href="#">Контакты</a>
-</div>
-
-<div class="container">
-    <div id="news-container"></div>
-</div>
-
-<script>
-    fetch('news.php')
-        .then(response => response.json())
-        .then(data => {
-            const newsContainer = document.getElementById('news-container');
-            data.forEach(newsItem => {
-                const newsDiv = document.createElement('div');
-                newsDiv.classList.add('news');
-                newsDiv.innerHTML = `
-                    <div class="meta">Дата: ${newsItem.date} | Автор: ${newsItem.author}</div>
-                    <h2>${newsItem.title}</h2>
-                    <img src="${newsItem.image}" alt="News Image">
-                    <p>${newsItem.content}</p>
-                `;
-                newsContainer.appendChild(newsDiv);
-            });
-        })
-        .catch(error => console.error('Error fetching news:', error));
-</script>
-
+    <div class="background">
+        <div class="stripe stripe1"></div>
+        <div class="stripe stripe2"></div>
+        <div class="stripe stripe3"></div>
+        <div class="stripe stripe4"></div>
+        <div class="stripe stripe5"></div>
+        <div class="stripe stripe1"></div>
+        <div class="stripe stripe2"></div>
+        <div class="stripe stripe3"></div>
+        <div class="stripe stripe4"></div>
+        <div class="stripe stripe5"></div>
 </body>
 </html>
