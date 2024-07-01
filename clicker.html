@@ -14,7 +14,6 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             overflow: hidden;
-            touch-action: none; /* Отключает все жесты */
         }
         .game-container {
             text-align: center;
@@ -29,9 +28,6 @@
             cursor: pointer;
             transition: transform 0.1s;
             position: relative;
-        }
-        .emoji:active {
-            transform: scale(0.9);
         }
         .score {
             font-size: 48px;
@@ -118,25 +114,6 @@
                     miniEmoji.remove();
                 });
             }
-
-            // Отключение контекстного меню
-            document.addEventListener('contextmenu', event => event.preventDefault());
-
-            // Отключение двойного клика для зума
-            document.addEventListener('dblclick', event => event.preventDefault());
-
-            // Отключение масштабирования через жесты
-            document.addEventListener('touchstart', event => {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchmove', event => {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, { passive: false });
         });
     </script>
 </body>
