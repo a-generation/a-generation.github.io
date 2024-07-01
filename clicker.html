@@ -14,10 +14,7 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             overflow: hidden;
-            touch-action: none; /* Отключение жестов */
-            -webkit-user-select: none; /* Отключение выбора текста на iOS */
-            -ms-user-select: none; /* Отключение выбора текста на Windows */
-            user-select: none; /* Отключение выбора текста */
+            touch-action: none; /* Отключает все жесты */
         }
         .game-container {
             text-align: center;
@@ -121,12 +118,26 @@
                     miniEmoji.remove();
                 });
             }
-        });
 
-        // Отключаем жесты браузера
-        window.addEventListener('gesturestart', (e) => e.preventDefault());
-        window.addEventListener('gesturechange', (e) => e.preventDefault());
-        window.addEventListener('gestureend', (e) => e.preventDefault());
+            // Отключение контекстного меню
+            document.addEventListener('contextmenu', event => event.preventDefault());
+
+            // Отключение двойного клика для зума
+            document.addEventListener('dblclick', event => event.preventDefault());
+
+            // Отключение масштабирования через жесты
+            document.addEventListener('touchstart', event => {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', event => {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+        });
     </script>
 </body>
 </html>
