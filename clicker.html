@@ -62,7 +62,7 @@
 
             emojiElement.addEventListener('click', () => {
                 score++;
-                scoreElement.textContent = `Score: ${score}`;
+                scoreElement.textContent = `${score}`;
                 emojiElement.textContent = emojis[score % emojis.length];
             });
 
