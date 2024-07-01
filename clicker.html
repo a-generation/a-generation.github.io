@@ -13,6 +13,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            overflow: hidden;
         }
         .game-container {
             text-align: center;
@@ -20,17 +21,19 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         .emoji {
-            font-size: 100px;
+            font-size: 150px;
             cursor: pointer;
             transition: transform 0.1s;
+            position: relative;
         }
         .emoji:active {
             transform: scale(0.9);
         }
         .score {
-            font-size: 24px;
+            font-size: 48px;
             margin-top: 20px;
         }
         #resetButton {
@@ -39,9 +42,28 @@
             font-size: 18px;
             border: none;
             border-radius: 5px;
-            background-color: #0056b3;
+            background-color: #ff5733; /* Новый цвет кнопки */
             color: white;
             cursor: pointer;
+        }
+        #resetButton:hover {
+            background-color: #c70039;
+        }
+        .mini-emoji {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: fadeUp 2s forwards;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
         }
     </style>
 </head>
@@ -62,15 +84,39 @@
 
             emojiElement.addEventListener('click', () => {
                 score++;
-                scoreElement.textContent = `${score}`;
+                scoreElement.textContent = score;
                 emojiElement.textContent = emojis[score % emojis.length];
+
+                // Создаем маленькие копии эмодзи
+                for (let i = 0; i < 5; i++) {
+                    createMiniEmoji(emojiElement.textContent);
+                }
             });
 
             resetButton.addEventListener('click', () => {
                 score = 0;
-                scoreElement.textContent = `${score}`;
+                scoreElement.textContent = score;
                 emojiElement.textContent = emojis[0];
             });
+
+            function createMiniEmoji(emoji) {
+                const miniEmoji = document.createElement('div');
+                miniEmoji.textContent = emoji;
+                miniEmoji.classList.add('mini-emoji');
+                document.body.appendChild(miniEmoji);
+
+                // Позиционируем маленькие эмодзи вокруг большого эмодзи
+                const rect = emojiElement.getBoundingClientRect();
+                const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
+                const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
+                miniEmoji.style.left = `${x}px`;
+                miniEmoji.style.top = `${y}px`;
+
+                // Удаляем маленькие эмодзи после завершения анимации
+                miniEmoji.addEventListener('animationend', () => {
+                    miniEmoji.remove();
+                });
+            }
         });
     </script>
 </body>
