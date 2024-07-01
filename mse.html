@@ -1,63 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MSE Notepad</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
-    textarea {
-        width: 100%;
-        height: 300px;
-        margin-bottom: 10px;
-        padding: 10px;
-        font-size: 14px;
-    }
-    button {
-        padding: 10px 20px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-</style>
+    <p>Hello world!</p>
 </head>
-<body>
-    <h1>MSE Notepad</h1>
-    <textarea id="txtContent" placeholder="Paste your MSE file content here..."></textarea><br>
-    <button onclick="decryptAndDisplay()">Decrypt & Display</button>
-    <button onclick="encryptAndSave()">Encrypt & Save</button>
-
-    <script>
-        // Function to decrypt and display MSE file content
-        function decryptAndDisplay() {
-            let mseContent = document.getElementById('txtContent').value.trim();
-            let decryptedContent = decryptMSE(mseContent);
-            document.getElementById('txtContent').value = decryptedContent;
-        }
-
-        // Function to encrypt content to MSE format
-        function encryptAndSave() {
-            let plainContent = document.getElementById('txtContent').value.trim();
-            let encryptedContent = encryptToMSE(plainContent);
-            // Simulate saving, you can implement actual saving logic here
-            alert("Encrypted MSE content:\n" + encryptedContent);
-        }
-
-        // Function to decrypt MSE content
-        function decryptMSE(mseContent) {
-            // Implement decryption logic based on your MSE encryption rules
-            // For simplicity, assuming direct decryption for demonstration
-            return mseContent; // Replace with actual decryption logic
-        }
-
-        // Function to encrypt content to MSE format
-        function encryptToMSE(plainContent) {
-            // Implement encryption logic based on your MSE encryption rules
-            // For simplicity, assuming direct encryption for demonstration
-            return plainContent; // Replace with actual encryption logic
-        }
-    </script>
-</body>
 </html>
