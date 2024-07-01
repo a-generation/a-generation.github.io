@@ -14,6 +14,10 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             overflow: hidden;
+            touch-action: none; /* Отключение жестов */
+            -webkit-user-select: none; /* Отключение выбора текста на iOS */
+            -ms-user-select: none; /* Отключение выбора текста на Windows */
+            user-select: none; /* Отключение выбора текста */
         }
         .game-container {
             text-align: center;
@@ -117,17 +121,12 @@
                     miniEmoji.remove();
                 });
             }
-
-            // Отключение зума при двойном тапе
-            let lastTouchEnd = 0;
-            document.addEventListener('touchstart', (event) => {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
         });
+
+        // Отключаем жесты браузера
+        window.addEventListener('gesturestart', (e) => e.preventDefault());
+        window.addEventListener('gesturechange', (e) => e.preventDefault());
+        window.addEventListener('gestureend', (e) => e.preventDefault());
     </script>
 </body>
 </html>
