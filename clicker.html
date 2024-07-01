@@ -39,7 +39,7 @@
             font-size: 18px;
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
+            background-color: #e8e8e8;
             color: white;
             cursor: pointer;
         }
@@ -51,7 +51,7 @@
 <body>
     <div class="game-container">
         <div class="emoji" id="emoji">😀</div>
-        <div class="score" id="score">Score: 0</div>
+        <div class="score" id="score">0</div>
         <button id="resetButton">Reset</button>
     </div>
     <script>
@@ -71,7 +71,7 @@
 
             resetButton.addEventListener('click', () => {
                 score = 0;
-                scoreElement.textContent = `Score: ${score}`;
+                scoreElement.textContent = `${score}`;
                 emojiElement.textContent = emojis[0];
             });
         });
