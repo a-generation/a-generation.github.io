@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Generation Software License 1.0</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            transition: background-color 0.5s ease, color 0.5s ease, font-size 0.5s ease;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #f1f1f1;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+        }
+        .menu {
+            display: flex;
+            gap: 10px;
+        }
+        .menu select, .menu button {
+            padding: 8px;
+            font-size: 16px;
+        }
+        .theme-dark {
+            background-color: black;
+            color: white;
+        }
+        .theme-midnight {
+            background-color: #001f3f;
+            color: #f1c40f;
+        }
+        h1, h2 {
+            margin: 0;
+            transition: font-size 0.5s ease;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="white">White</option>
+                <option value="dark">Dark</option>
+                <option value="midnight">Midnight</option>
+            </select>
+            <label for="font-size-select">Font Size:</label>
+            <select id="font-size-select">
+                <option value="16">16px</option>
+                <option value="18">18px</option>
+                <option value="20">20px</option>
+                <option value="22">22px</option>
+                <option value="24">24px</option>
+            </select>
+        </div>
+    </header>
+
+    <main style="margin-top: 80px;">
+        <h1>A-Generation Software License 1.0</h1>
+
+        <h2>1. Applicability of the License</h2>
+        <p>This license is valid exclusively within the GitHub repositories of the developer "A-Generation." Any other users or developers who attempt to apply this license to their repositories do so unlawfully, and their use of the license is automatically voided. This license grants rights only concerning projects hosted within repositories owned and managed by "A-Generation." Repositories not associated with "A-Generation" are not permitted to reference this license. Any breach of this condition will result in the immediate revocation of all rights granted by this license.</p>
+
+        <h2>2. Definition of Software and Its Use</h2>
+        <p>The software (Software) distributed under this license includes both the source code and, in some cases, precompiled binary releases (such as exe files), which users are allowed to download and use. The Software can be of any type and is not restricted to specific functions or purposes, providing the user with the freedom to modify and use it. Users have the right to fully alter and redistribute their versions of the Software, but only under the condition of good-faith usage. Attribution to the original creator is voluntary but encouraged, and can be provided as a link to "https://github.com/a-generation/" or by mentioning "@a-generation". Modifications should not violate the principle of good-faith usage.</p>
+
+        <h2>3. Disclaimer of Liability</h2>
+        <p>By downloading the Software, the user automatically agrees that A-Generation is not liable for any outcomes or consequences related to the use of the Software. A-Generation acts as a free publisher, providing the source code openly without any guarantees regarding its functionality or fitness for any specific purpose. The license also absolves A-Generation from responsibility for the contents of the repository, including any changes made to the source code. The developer reserves the right to modify the code, remove portions of it, and release or withdraw versions at its discretion. The user acknowledges that the repository may be deleted at any time without prior notice.</p>
+
+        <h2>4. Disclaimer of Warranties</h2>
+        <p>The Software is provided "as is," without any warranty of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. A-Generation makes no guarantee that the Software will be free of defects, bugs, or security vulnerabilities. Users assume full responsibility for determining the appropriateness of using the Software and for any consequences associated with its use.</p>
+
+        <h2>5. Limitation of Liability</h2>
+        <p>In no event shall A-Generation be liable for any damages, including but not limited to direct, indirect, incidental, special, or consequential damages, or damages for loss of profits, revenue, data, or data use, arising out of or in any way connected with the use of the Software, whether in an action of contract, tort, or otherwise, even if A-Generation has been advised of the possibility of such damages.</p>
+
+        <h2>6. No Obligation for Maintenance or Support</h2>
+        <p>A-Generation is under no obligation to provide maintenance, support, updates, enhancements, or modifications for the Software. Users are responsible for managing their own versions and ensuring that any modifications or usage comply with their systems' requirements.</p>
+
+        <h2>7. User's Responsibility for Compliance and Use</h2>
+        <p>The user assumes full responsibility for ensuring that the Software is appropriate for their specific needs and is compatible with their hardware, software, and systems. Users are solely responsible for any actions they take with the Software and for any third-party claims that may arise from their use of the Software.</p>
+
+        <p>This repository is owned by A-Generation and is licensed under the A-Generation Software License, version dated October 1st, 2024 (01.10.2024). You are currently on the page with the full text of the A-Generation Software License.</p>
+    </main>
+
+    <script>
+        const themeSelect = document.getElementById('theme-select');
+        const fontSizeSelect = document.getElementById('font-size-select');
+
+        themeSelect.addEventListener('change', function() {
+            document.body.className = '';
+            const selectedTheme = themeSelect.value;
+            if (selectedTheme === 'dark') {
+                document.body.classList.add('theme-dark');
+            } else if (selectedTheme === 'midnight') {
+                document.body.classList.add('theme-midnight');
+            }
+        });
+
+        fontSizeSelect.addEventListener('change', function() {
+            const selectedSize = fontSizeSelect.value + 'px';
+            document.body.style.fontSize = selectedSize;
+            document.querySelectorAll('h1, h2').forEach((heading) => {
+                heading.style.fontSize = (parseInt(selectedSize) + (heading.tagName === 'H1' ? 8 : 4)) + 'px';
+            });
+        });
+
+        const panelElements = document.querySelectorAll('.menu select, .menu label');
+        panelElements.forEach(element => {
+            element.style.color = 'black';
+        });
+    </script>
+</body>
+</html>
